@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import ThemeToggle from "./ThemeToggle";
 import { IconMenu2, IconX, IconArrowUpRight } from "@tabler/icons-react";
 
 const navLinks = [
@@ -60,7 +59,6 @@ export default function Navbar() {
               NorthPeak <span className="text-[#B5B5B5] font-light">Digital</span>
             </span>
           </a>
-          <ThemeToggle />
 
           {/* Desktop Links with Underline Animation */}
           <nav className="hidden md:flex items-center gap-8">

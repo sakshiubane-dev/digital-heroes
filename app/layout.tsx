@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -55,9 +54,7 @@ export default function RootLayout({
       className={`${manrope.variable} ${inter.variable} ${garamond.variable} scroll-smooth dark`}
     >
       <body className="bg-[#0B0B0B] text-[#F7F7F5] font-sans antialiased min-h-screen relative overflow-x-hidden selection:bg-[#4F8CFF]/20 selection:text-white">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
