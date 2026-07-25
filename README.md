@@ -1,3 +1,28 @@
+## Live Demo
+
+Live URL:
+[Placeholder for deployment URL]
+
+Repository:
+[Placeholder for GitHub URL]
+
+Built as part of the Digital Heroes Training Task.
+
+## Deployment Checklist
+
+- No localhost URLs.
+- No broken images.
+- No console errors.
+- No hydration errors.
+- Responsive across desktop, tablet, and mobile.
+- Footer credit remains visible on every screen size.
+
+Placeholders:
+- LIVE_URL_HERE
+- GITHUB_REPOSITORY_HERE
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
