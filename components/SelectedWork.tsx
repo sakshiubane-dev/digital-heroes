@@ -1,7 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { IconArrowUpRight } from "@tabler/icons-react";
+import Image from "next/image";
+import AnimateOnView from "./AnimateOnView";
 
 const projects = [
   {
@@ -63,18 +61,16 @@ export default function SelectedWork() {
         <div className="space-y-36">
           
           {/* Project 1: NovaPay */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <AnimateOnView
             className="group cursor-pointer flex flex-col gap-8"
           >
             <div className="img-zoom w-full h-[420px] sm:h-[600px] rounded-3xl bg-[#151515] border border-[#262626] relative">
-              <img
+              <Image
                 src={projects[0].image}
                 alt={projects[0].name}
-                className="w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                fill
+                sizes="(max-width: 1024px) 100vw, 1360px"
+                className="object-cover opacity-90 group-hover:opacity-100 rounded-3xl"
               />
               <div className="absolute top-6 right-6 bg-[#0B0B0B]/80 backdrop-blur-md px-4 py-2 rounded-full border border-[#262626] text-xs font-mono font-bold text-[#4F8CFF]">
                 {projects[0].id} / 03
@@ -109,18 +105,14 @@ export default function SelectedWork() {
 
                 <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#F7F7F5] group-hover:text-[#4F8CFF] transition-colors">
                   <span>Read Story</span>
-                  <IconArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-[#4F8CFF]" />
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-[#4F8CFF]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </AnimateOnView>
 
           {/* Project 2: Text First, Large Image Second */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <AnimateOnView
             className="group cursor-pointer flex flex-col gap-8"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-4 border-b border-[#262626]">
@@ -151,36 +143,36 @@ export default function SelectedWork() {
 
                 <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#F7F7F5] group-hover:text-[#4F8CFF] transition-colors">
                   <span>Read Story</span>
-                  <IconArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-[#4F8CFF]" />
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-[#4F8CFF]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
                 </div>
               </div>
             </div>
 
             <div className="img-zoom w-full h-[420px] sm:h-[550px] rounded-3xl bg-[#151515] border border-[#262626] relative">
-              <img
+              <Image
                 src={projects[1].image}
                 alt={projects[1].name}
-                className="w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                fill
+                sizes="(max-width: 1024px) 100vw, 1360px"
+                className="object-cover opacity-90 group-hover:opacity-100 rounded-3xl"
               />
               <div className="absolute top-6 right-6 bg-[#0B0B0B]/80 backdrop-blur-md px-4 py-2 rounded-full border border-[#262626] text-xs font-mono font-bold text-[#4F8CFF]">
                 {projects[1].id} / 03
               </div>
             </div>
-          </motion.div>
+          </AnimateOnView>
 
           {/* Project 3: Split Image Left, Text Right */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <AnimateOnView
             className="group cursor-pointer grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
           >
             <div className="lg:col-span-7 img-zoom h-[380px] sm:h-[500px] rounded-3xl bg-[#151515] border border-[#262626] relative">
-              <img
+              <Image
                 src={projects[2].image}
                 alt={projects[2].name}
-                className="w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover opacity-90 group-hover:opacity-100 rounded-3xl"
               />
               <div className="absolute top-6 right-6 bg-[#0B0B0B]/80 backdrop-blur-md px-4 py-2 rounded-full border border-[#262626] text-xs font-mono font-bold text-[#4F8CFF]">
                 {projects[2].id} / 03
@@ -211,10 +203,10 @@ export default function SelectedWork() {
 
               <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#F7F7F5] group-hover:text-[#4F8CFF] transition-colors">
                 <span>Read Story</span>
-                <IconArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-[#4F8CFF]" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform text-[#4F8CFF]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
               </div>
             </div>
-          </motion.div>
+          </AnimateOnView>
 
         </div>
 

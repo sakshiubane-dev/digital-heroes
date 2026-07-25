@@ -1,7 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { IconArrowRight } from "@tabler/icons-react";
+import AnimateOnView from "./AnimateOnView";
 
 export default function Hero() {
   return (
@@ -12,10 +9,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: Massive Editorial Typography (7 cols) */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          <AnimateOnView
             className="lg:col-span-7 flex flex-col gap-6"
           >
             <div className="flex items-center gap-2">
@@ -33,13 +27,11 @@ export default function Hero() {
                 People Remember.
               </span>
             </h1>
-          </motion.div>
+          </AnimateOnView>
 
           {/* Right Column: Introduction & Refined Metrics (5 cols) */}
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          <AnimateOnView
+            delay={200}
             className="lg:col-span-5 flex flex-col gap-10 lg:pt-10"
           >
             <p className="text-base sm:text-lg text-[#B5B5B5] leading-relaxed font-normal">
@@ -53,7 +45,7 @@ export default function Hero() {
                 className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#F7F7F5] text-[#0B0B0B] hover:bg-[#4F8CFF] hover:text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md"
               >
                 <span>Start a Conversation</span>
-                <IconArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
               </a>
 
               <a
@@ -92,24 +84,22 @@ export default function Hero() {
               </div>
             </div>
 
-          </motion.div>
+          </AnimateOnView>
         </div>
 
       </div>
 
       {/* Minimal Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 1 }}
+      <AnimateOnView
+        delay={800}
         className="container mx-auto px-6 lg:px-12 max-w-[1360px] pt-12 flex items-center justify-between text-[#B5B5B5] text-xs uppercase tracking-widest border-t border-[#262626]"
       >
         <span>San Francisco &amp; Global Studio</span>
         <a href="#work" className="flex items-center gap-2 hover:text-[#F7F7F5] transition-colors">
           <span>Scroll to explore</span>
-          <span className="animate-bounce">&darr;</span>
+          <span style={{ animation: "bounce 2s infinite" }}>&darr;</span>
         </a>
-      </motion.div>
+      </AnimateOnView>
     </section>
   );
 }

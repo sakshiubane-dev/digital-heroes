@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { IconArrowRight, IconCheck } from "@tabler/icons-react";
+import AnimateOnView from "./AnimateOnView";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -50,11 +49,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           
           {/* Left Column: Large Closing Statement (5 cols) */}
-          <motion.div
-            initial={{ opacity: 0, x: -25 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+          <AnimateOnView
             className="lg:col-span-5 flex flex-col gap-6"
           >
             <span className="text-xs font-bold uppercase tracking-widest text-[#B5B5B5]">
@@ -89,14 +84,11 @@ export default function Contact() {
                 <span>San Francisco, CA & Remote Global</span>
               </div>
             </div>
-          </motion.div>
+          </AnimateOnView>
 
           {/* Right Column: Floating Labels Form (7 cols) */}
-          <motion.div
-            initial={{ opacity: 0, x: 25 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+          <AnimateOnView
+            delay={200}
             className="lg:col-span-7"
           >
             <div className="p-8 sm:p-12 rounded-3xl bg-[#151515] border border-[#262626]">
@@ -104,7 +96,7 @@ export default function Contact() {
               {submitted ? (
                 <div className="py-12 text-center flex flex-col items-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-[#4F8CFF]/20 text-[#4F8CFF] flex items-center justify-center">
-                    <IconCheck className="w-7 h-7 stroke-[3]" />
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 stroke-[3]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
                   </div>
                   <h3 className="text-2xl font-bold text-[#F7F7F5]">Inquiry Received</h3>
                   <p className="text-sm text-[#B5B5B5] max-w-sm">
@@ -225,14 +217,14 @@ export default function Contact() {
                     ) : (
                       <>
                         <span>Submit Project Brief</span>
-                        <IconArrowRight className="w-4 h-4" />
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
                       </>
                     )}
                   </button>
                 </form>
               )}
             </div>
-          </motion.div>
+          </AnimateOnView>
 
         </div>
       </div>

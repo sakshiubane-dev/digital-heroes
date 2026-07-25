@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import AnimateOnView from "./AnimateOnView";
 
 const steps = [
   {
@@ -58,13 +56,10 @@ export default function GrowthFramework() {
         {/* 6-Stage Timeline */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 relative">
           {steps.map((s, idx) => (
-            <motion.div
+            <AnimateOnView
               key={s.step}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="p-6 rounded-2xl bg-[#151515] border border-[#262626] flex flex-col justify-between group hover:border-[#4F8CFF] transition-all duration-300"
+              delay={idx * 100}
+              className="p-6 rounded-2xl bg-[#151515] border border-[#262626] flex flex-col justify-between group hover:border-[#4F8CFF] transition-all duration-300 h-full"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
@@ -84,7 +79,7 @@ export default function GrowthFramework() {
               <p className="text-xs text-[#B5B5B5] leading-relaxed pt-4 border-t border-[#262626]">
                 {s.description}
               </p>
-            </motion.div>
+            </AnimateOnView>
           ))}
         </div>
 

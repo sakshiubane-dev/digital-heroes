@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { IconMenu2, IconX, IconArrowUpRight } from "@tabler/icons-react";
 
 const navLinks = [
   { name: "Work", href: "#work" },
@@ -16,34 +14,53 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+    let ticking = false;
+    let cachedScrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    // Cache the height on resize to avoid forced reflow on every scroll
+    const handleResize = () => {
+      cachedScrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          setScrolled(scrollY > 40);
+          
+          if (cachedScrollHeight > 0) {
+            setScrollProgress(scrollY / cachedScrollHeight);
+          }
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
     <>
       {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#4F8CFF] origin-left z-50"
-        style={{ scaleX }}
+      <div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#4F8CFF] origin-left z-50 transition-transform duration-75"
+        style={{ transform: `scaleX(${scrollProgress})` }}
       />
 
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           scrolled
-            ? "bg-[#0B0B0B]/80 backdrop-blur-md border-b border-[#262626] py-3.5"
+            ? "bg-[#0B0B0B]/80 backdrop-blur-sm border-b border-[#262626] py-3.5"
             : "bg-transparent py-6"
         }`}
       >
@@ -80,7 +97,7 @@ export default function Navbar() {
               className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#262626] hover:border-[#4F8CFF] text-xs font-medium text-[#F7F7F5] bg-[#151515] hover:bg-[#4F8CFF] hover:text-white transition-all duration-300"
             >
               <span>Start a Project</span>
-              <IconArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
             </a>
           </div>
 
@@ -90,37 +107,38 @@ export default function Navbar() {
             className="md:hidden p-2 text-[#F7F7F5] focus:outline-none"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <IconX className="w-6 h-6" /> : <IconMenu2 className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+            )}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden bg-[#0B0B0B] border-b border-[#262626] px-6 py-8 flex flex-col gap-5"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base text-[#B5B5B5] hover:text-[#F7F7F5] font-medium"
-              >
-                {link.name}
-              </a>
-            ))}
+        <div
+          className={`md:hidden bg-[#0B0B0B] border-b border-[#262626] px-6 flex flex-col gap-5 overflow-hidden transition-all duration-300 ease-in-out ${
+            mobileMenuOpen ? "max-h-[400px] py-8 opacity-100" : "max-h-0 py-0 opacity-0"
+          }`}
+        >
+          {navLinks.map((link) => (
             <a
-              href="#contact"
+              key={link.name}
+              href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 w-full text-center px-6 py-3 rounded-full bg-[#4F8CFF] text-white text-xs font-bold uppercase tracking-wider"
+              className="text-base text-[#B5B5B5] hover:text-[#F7F7F5] font-medium"
             >
-              Start a Project
+              {link.name}
             </a>
-          </motion.div>
-        )}
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setMobileMenuOpen(false)}
+            className="mt-2 w-full text-center px-6 py-3 rounded-full bg-[#4F8CFF] text-white text-xs font-bold uppercase tracking-wider"
+          >
+            Start a Project
+          </a>
+        </div>
       </header>
     </>
   );

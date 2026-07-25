@@ -1,6 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Image from "next/image";
+import AnimateOnView from "./AnimateOnView";
 
 const testimonials = [
   {
@@ -40,18 +39,16 @@ export default function Testimonials() {
         <div className="space-y-20">
           
           {/* Testimonial 1: Photo Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+          <AnimateOnView
             className="p-8 sm:p-12 rounded-3xl bg-[#151515] border border-[#262626] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
           >
-            <div className="lg:col-span-4 img-zoom h-64 sm:h-80 rounded-2xl overflow-hidden bg-[#1E1E1E]">
-              <img
+            <div className="lg:col-span-4 img-zoom h-64 sm:h-80 rounded-2xl overflow-hidden bg-[#1E1E1E] relative">
+              <Image
                 src={testimonials[0].avatar}
                 alt={testimonials[0].author}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                fill
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
 
@@ -70,14 +67,11 @@ export default function Testimonials() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </AnimateOnView>
 
           {/* Testimonial 2: Photo Right */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15 }}
+          <AnimateOnView
+            delay={150}
             className="p-8 sm:p-12 rounded-3xl bg-[#151515] border border-[#262626] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
           >
             <div className="lg:col-span-8 lg:order-1 flex flex-col justify-between gap-6">
@@ -96,14 +90,16 @@ export default function Testimonials() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 lg:order-2 img-zoom h-64 sm:h-80 rounded-2xl overflow-hidden bg-[#1E1E1E]">
-              <img
+            <div className="lg:col-span-4 lg:order-2 img-zoom h-64 sm:h-80 rounded-2xl overflow-hidden bg-[#1E1E1E] relative">
+              <Image
                 src={testimonials[1].avatar}
                 alt={testimonials[1].author}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                fill
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
-          </motion.div>
+          </AnimateOnView>
 
         </div>
 

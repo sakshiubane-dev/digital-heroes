@@ -1,7 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { IconCheck, IconArrowRight } from "@tabler/icons-react";
+import AnimateOnView from "./AnimateOnView";
 
 const plans = [
   {
@@ -73,12 +70,9 @@ export default function Pricing() {
         {/* Minimal Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {plans.map((p, idx) => (
-            <motion.div
+            <AnimateOnView
               key={p.name}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.12 }}
+              delay={idx * 120}
               className={`p-8 sm:p-10 rounded-3xl bg-[#151515] border flex flex-col justify-between transition-all duration-300 ${
                 p.highlight
                   ? "border-[#4F8CFF] bg-[#1A1A1A]"
@@ -112,7 +106,7 @@ export default function Pricing() {
                   </span>
                   {p.features.map((f) => (
                     <div key={f} className="flex items-center gap-3 text-xs text-[#F7F7F5]">
-                      <IconCheck className="w-4 h-4 text-[#4F8CFF] shrink-0" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[#4F8CFF] shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
                       <span>{f}</span>
                     </div>
                   ))}
@@ -121,16 +115,16 @@ export default function Pricing() {
 
               <a
                 href="#contact"
-                className={`w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                className={`group w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                   p.highlight
                     ? "bg-[#4F8CFF] hover:bg-[#3b72e0] text-white"
                     : "bg-[#1E1E1E] hover:bg-[#262626] text-[#F7F7F5] border border-[#262626]"
                 }`}
               >
                 <span>{p.cta}</span>
-                <IconArrowRight className="w-4 h-4" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
               </a>
-            </motion.div>
+            </AnimateOnView>
           ))}
         </div>
 

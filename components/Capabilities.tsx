@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { IconArrowUpRight, IconPlus, IconMinus } from "@tabler/icons-react";
 
 const capabilities = [
   {
@@ -97,51 +95,48 @@ export default function Capabilities() {
 
                   <div className="w-10 h-10 rounded-full border border-[#262626] flex items-center justify-center text-[#B5B5B5] shrink-0">
                     {isOpen ? (
-                      <IconMinus className="w-5 h-5 text-[#4F8CFF]" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-[#4F8CFF]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /></svg>
                     ) : (
-                      <IconPlus className="w-5 h-5" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                     )}
                   </div>
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: "easeInOut" }}
-                    >
-                      <div className="px-4 sm:px-8 pb-8 pt-2 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                        <div className="lg:col-start-3 lg:col-span-7">
-                          <p className="text-sm sm:text-base text-[#B5B5B5] leading-relaxed mb-6">
-                            {cap.description}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {cap.tags.map((t) => (
-                              <span
-                                key={t}
-                                className="text-[11px] font-medium uppercase tracking-wider text-[#B5B5B5] bg-[#1E1E1E] border border-[#262626] px-3 py-1 rounded-full"
-                              >
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="lg:col-span-3 flex justify-start lg:justify-end pt-4 lg:pt-0">
-                          <a
-                            href="#contact"
-                            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#4F8CFF] hover:text-white transition-colors"
-                          >
-                            <span>Discuss Capability</span>
-                            <IconArrowUpRight className="w-4 h-4" />
-                          </a>
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-4 sm:px-8 pb-8 pt-2 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                      <div className="lg:col-start-3 lg:col-span-7">
+                        <p className="text-sm sm:text-base text-[#B5B5B5] leading-relaxed mb-6">
+                          {cap.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {cap.tags.map((t) => (
+                            <span
+                              key={t}
+                              className="text-[11px] font-medium uppercase tracking-wider text-[#B5B5B5] bg-[#1E1E1E] border border-[#262626] px-3 py-1 rounded-full"
+                            >
+                              {t}
+                            </span>
+                          ))}
                         </div>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+
+                      <div className="lg:col-span-3 flex justify-start lg:justify-end pt-4 lg:pt-0">
+                        <a
+                          href="#contact"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#4F8CFF] hover:text-white transition-colors group"
+                        >
+                          <span>Discuss Capability</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             );
           })}

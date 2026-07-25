@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import AnimateOnView from "./AnimateOnView";
 
 const impactStats = [
   {
@@ -38,12 +36,9 @@ export default function ClientResults() {
         {/* Huge Typography Numbers Stacked (NO CARDS) */}
         <div className="space-y-16">
           {impactStats.map((item, idx) => (
-            <motion.div
+            <AnimateOnView
               key={item.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.15 }}
+              delay={idx * 150}
               className="border-b border-[#262626] pb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-baseline"
             >
               {/* Huge Number (5 cols) */}
@@ -62,7 +57,7 @@ export default function ClientResults() {
                   {item.detail}
                 </p>
               </div>
-            </motion.div>
+            </AnimateOnView>
           ))}
         </div>
 
